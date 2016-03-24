@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    
+    <xs:element name="week">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="days" type="daysType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="courses" type="coursesType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="times" type="timesType" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="daysType">
+        <xs:sequence>
+            <xs:element name="course" type="courseType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="dayType"/>
+    </xs:complexType>
+    
+    <xs:simpleType name="dayType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="monday"/>
+            <xs:enumeration value="tuesday"/>
+            <xs:enumeration value="wednesday"/>
+            <xs:enumeration value="thursday"/>
+            <xs:enumeration value="friday"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:complexType name="courseType">
+        <xs:sequence>
+            <xs:element name="id" type="courseNumType"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="crn" type="xs:integer"/>
+            <xs:element name="type" type="roomType"/>
+            <xs:element name="building" type="xs:string"/>
+            <xs:element name="room" type="xs:integer"/>
+            <xs:element name="start" type="xs:integer"/>
+            <xs:element name="end" type="xs:integer"/>
+            <xs:element name="instructor" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="cType"/>
+    </xs:complexType>
+    
+    <xs:simpleType name="courseNumType">
+        <xs:restriction base="xs:integer">
+            <xs:pattern value="[0-9][0-9][0-9][0-9]"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="roomType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Lecture"/>
+            <xs:enumeration value="Lab"/>
+            <xs:enumeration value="Tutorial"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <xs:simpleType name="cType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="acit"/>
+            <xs:enumeration value="comp"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

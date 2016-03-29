@@ -7,9 +7,9 @@ and open the template in the editor.
 
 <!-- picked ACIT4850 as to show course facets -->
 
-<!DOCTYPE week SYSTEM 'schedule.dtd'>
-
-<week>
+<week
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:noNamespaceSchemaLocation='schedule.xsd'>
     <courses type="acit">
             <id>4850</id>
             <day type="wednesday">

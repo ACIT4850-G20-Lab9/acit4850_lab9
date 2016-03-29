@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<xs:schema version="1.0"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema">
+
+    <!-- root element, week, contains days,courses, and times nested elements -->    
+    <xs:element name="week">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="days" type="daysType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="courses" type="coursesType" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="times" type="timesType" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+   <!--days table, a list of allowed day codes -->
+    <xs:complexType name="daysType">
+        <xs:sequence>
+            <xs:element name="course" type="courseType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="dayType"/>
+    </xs:complexType>
+    
+    <!--Model for week days -->
+    <xs:simpleType name="dayType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="monday"/>
+            <xs:enumeration value="tuesday"/>
+            <xs:enumeration value="wednesday"/>
+            <xs:enumeration value="thursday"/>
+            <xs:enumeration value="friday"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- meat of schema: course attending -->
+    <xs:complexType name="courseType">
+        <xs:sequence>
+            <xs:element name="id" type="courseNumType"/>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="crn" type="xs:integer"/>
+            <xs:element name="type" type="roomType"/>
+            <xs:element name="building" type="xs:string"/>
+            <xs:element name="room" type="xs:integer"/>
+            <xs:element name="start" type="xs:integer"/>
+            <xs:element name="end" type="xs:integer"/>
+            <xs:element name="instructor" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="cType"/>
+    </xs:complexType>
+    
+    <!-- 24 hours format -->
+    <xs:simpleType name="courseNumType">
+        <xs:restriction base="xs:integer">
+            <xs:pattern value="[0-9][0-9][0-9][0-9]"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- Defined Room type -->
+    <xs:simpleType name="roomType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Lecture"/>
+            <xs:enumeration value="Lab"/>
+            <xs:enumeration value="Tutorial"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!--Defined course type -->
+    <xs:simpleType name="cType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="acit"/>
+            <xs:enumeration value="comp"/>
+        </xs:restriction>
+    </xs:simpleType>
+    
+    <!-- courses facets -->
+    <xs:complexType name="coursesType">
+        <xs:sequence>
+            <xs:element name="id" type="courseNumType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="day" type="dayOfCourseType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="cType"/>
+    </xs:complexType>
+    
+    <xs:complexType name="dayOfCourseType">
+        <xs:sequence>
+            <xs:element name="starttime" type="starttimeType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="dayType"/>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="starttimeType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="crn" type="xs:integer"/>
+            <xs:element name="type" type="roomType"/>
+            <xs:element name="building" type="xs:string"/>
+            <xs:element name="room" type="xs:integer"/>
+            <xs:element name="end" type="xs:integer"/>
+            <xs:element name="instructor" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="courseNumType"/>
+    </xs:complexType>
+    
+    <!-- timeslot facets-->
+    <xs:complexType name="timesType">
+        <xs:sequence>
+            <xs:element name="start" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="days" type="dayOfTimeType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="dayOfTimeType">
+        <xs:sequence>
+            <xs:element name="course" type="courseType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="dayType" />
+    </xs:complexType>
+</xs:schema>

@@ -7,7 +7,7 @@ and open the template in the editor.
 
 <week
     xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-    xsi:noNamespaceSchemaLocation='file:/Applications/XAMPP/xamppfiles/htdocs/acit4850_lab9/data/schedule.xsd'>
+    xsi:noNamespaceSchemaLocation='schedule.xsd'>
     <days type="monday">
         <course type="acit">
             <id>4770</id>

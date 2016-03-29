@@ -78,4 +78,33 @@ and open the template in the editor.
         </xs:restriction>
     </xs:simpleType>
     
+    <!-- courses facets -->
+    <xs:complexType name="coursesType">
+        <xs:sequence>
+            <xs:element name="id" type="courseNumType" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="day" type="dayOfCourseType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="cType"/>
+    </xs:complexType>
+    
+    <xs:complexType name="dayOfCourseType">
+        <xs:sequence>
+            <xs:element name="starttime" type="starttimeType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="dayType"/>
+    </xs:complexType>
+    
+    
+    <xs:complexType name="starttimeType">
+        <xs:sequence>
+            <xs:element name="name" type="xs:string"/>
+            <xs:element name="crn" type="xs:integer"/>
+            <xs:element name="type" type="roomType"/>
+            <xs:element name="building" type="xs:string"/>
+            <xs:element name="room" type="xs:integer"/>
+            <xs:element name="end" type="xs:integer"/>
+            <xs:element name="instructor" type="xs:string"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="courseNumType"/>
+    </xs:complexType>
 </xs:schema>

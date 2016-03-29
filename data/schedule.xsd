@@ -7,7 +7,8 @@ and open the template in the editor.
 
 <xs:schema version="1.0"
            xmlns:xs="http://www.w3.org/2001/XMLSchema">
-    
+
+    <!-- root element, week, contains days,courses, and times nested elements -->    
     <xs:element name="week">
         <xs:complexType>
             <xs:sequence>
@@ -18,6 +19,7 @@ and open the template in the editor.
         </xs:complexType>
     </xs:element>
 
+   <!--days table, a list of allowed day codes -->
     <xs:complexType name="daysType">
         <xs:sequence>
             <xs:element name="course" type="courseType" minOccurs="0" maxOccurs="unbounded"/>
@@ -25,6 +27,7 @@ and open the template in the editor.
         <xs:attribute name="type" type="dayType"/>
     </xs:complexType>
     
+    <!--Model for week days -->
     <xs:simpleType name="dayType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="monday"/>
@@ -35,6 +38,7 @@ and open the template in the editor.
         </xs:restriction>
     </xs:simpleType>
     
+    <!-- meat of schema: course attending -->
     <xs:complexType name="courseType">
         <xs:sequence>
             <xs:element name="id" type="courseNumType"/>
@@ -50,12 +54,14 @@ and open the template in the editor.
         <xs:attribute name="type" type="cType"/>
     </xs:complexType>
     
+    <!-- 24 hours format -->
     <xs:simpleType name="courseNumType">
         <xs:restriction base="xs:integer">
             <xs:pattern value="[0-9][0-9][0-9][0-9]"/>
         </xs:restriction>
     </xs:simpleType>
     
+    <!-- Defined Room type -->
     <xs:simpleType name="roomType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="Lecture"/>
@@ -64,10 +70,12 @@ and open the template in the editor.
         </xs:restriction>
     </xs:simpleType>
     
+    <!--Defined course type -->
     <xs:simpleType name="cType">
         <xs:restriction base="xs:string">
             <xs:enumeration value="acit"/>
             <xs:enumeration value="comp"/>
         </xs:restriction>
     </xs:simpleType>
+    
 </xs:schema>

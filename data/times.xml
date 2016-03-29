@@ -5,9 +5,10 @@ To change this template file, choose Tools | Templates
 and open the template in the editor.
 -->
 
-<!DOCTYPE week SYSTEM 'schedule.dtd'>
+<!--<!DOCTYPE week SYSTEM 'schedule.dtd'> -->
 
-<week>
+<week xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:noNamespaceSchemaLocation='file:/Applications/XAMPP/xamppfiles/htdocs/acit4850_lab9/data/schedule.xsd'>
     <times>
         <start>1030</start>
         <days type="tuesday">

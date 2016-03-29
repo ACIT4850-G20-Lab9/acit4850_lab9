@@ -107,4 +107,18 @@ and open the template in the editor.
         </xs:sequence>
         <xs:attribute name="type" type="courseNumType"/>
     </xs:complexType>
+    
+    <!-- timeslot facets-->
+    <xs:complexType name="timesType">
+        <xs:sequence>
+            <xs:element name="start" type="xs:integer" minOccurs="0" maxOccurs="1"/>
+            <xs:element name="days" type="dayOfTimeType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="dayOfTimeType">
+        <xs:sequence>
+            <xs:element name="course" type="courseType" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+        <xs:attribute name="type" type="dayType" />
+    </xs:complexType>
 </xs:schema>
